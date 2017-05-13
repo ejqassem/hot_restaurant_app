@@ -1,0 +1,25 @@
+{
+  "name": "hot_restaurant_app",
+  "version": "1.0.0",
+  "description": "Full-stack application allowing users to make reservations at a restaurant",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ejqassem/hot_restaurant_app.git"
+  },
+  "author": "Eyad Qassem",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ejqassem/hot_restaurant_app/issues"
+  },
+  "homepage": "https://github.com/ejqassem/hot_restaurant_app#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "path": "^0.12.7"
+  }
+}

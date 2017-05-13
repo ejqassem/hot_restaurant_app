@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Reserve a Title </title>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="name" type="text" class="validate">
+          <label for="name"> Name: </label>
+        </div>
+        <div class="input-field col s6">
+          <input id="unique_id" type="text" class="validate">
+          <label for="unique_id">Party Name: </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          Please enter your phone-number:
+          <div class="input-field inline">
+            <input id="phone_number" type="tel" class="validate">
+            <label for="phone_number" data-error="wrong" data-success="right">Phone Number:</label>
+          </div>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action" id="submit-form">Submit
+    <i class="material-icons right">send</i>
+  </button>
+    </form>
+  </div>
+
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+  <script>
+
+    var counter = 0;
+    $("#submit-form").on('click', function(event) {
+      event.preventDefault();
+      var reserve_wait = {
+        name: $("#name").val().trim(),
+        party_name: $("#unique_id").val().trim(),
+        email: $("#email").val().trim(),
+        phone_number: $("#phone_number").val().trim()
+      };
+
+      if(counter < 2) {
+        $.post("/api/reserve", reserve_wait).done(function(data) {
+          console.log(data);
+          alert("Adding new reservation...");
+        });
+        counter++;
+      }
+      else {
+        $.post("/api/waitlist", reserve_wait).done(function(data) {
+          console.log("Wait-list: " + data);
+          alert("Adding to wait-list...");
+        });
+        counter++;
+      }
+    });
+
+  </script>
+</body>
+</html>
