@@ -9,6 +9,26 @@
 </head>
 <body>
 
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Where's the Beef? </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/">Home Page </a></li>
+        <li><a href="/tables">View Reservations</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="row">
+     <div class="col s12 m12">
+       <div class="card-panel blue lighten-2">
+         <span class="white-text"> Welcome to Where's the Beef! Please make a reservation by entering your information below!
+         </span>
+       </div>
+     </div>
+   </div>
+
+
   <div class="row">
     <form class="col s12">
       <div class="row">
@@ -49,7 +69,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   <script>
 
-    var counter = 0;
+
     $("#submit-form").on('click', function(event) {
       event.preventDefault();
       var reserve_wait = {
@@ -59,21 +79,22 @@
         phone_number: $("#phone_number").val().trim()
       };
 
-      if(counter < 2) {
-        $.post("/api/reserve", reserve_wait).done(function(data) {
-          console.log(data);
-          alert("Adding new reservation...");
-        });
-        counter++;
-      }
-      else {
-        $.post("/api/waitlist", reserve_wait).done(function(data) {
-          console.log("Wait-list: " + data);
-          alert("Adding to wait-list...");
-        });
-        counter++;
-      }
+      $.get("/api/reserve", function(data) {
+
+        if(data.length < 2) {
+          $.post("/api/reserve", reserve_wait).done(function(data) {
+            console.log(data);
+            alert("Adding new reservation...");
+          });
+        }
+        else {
+          $.post("/api/waitlist", reserve_wait).done(function(data) {
+            console.log("Wait-list: " + data);
+            alert("Adding to wait-list...");
+          });
+        }
     });
+  });
 
   </script>
 </body>

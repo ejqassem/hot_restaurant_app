@@ -54,7 +54,7 @@ app.post("/api/waitlist", function(req,res) {
   var newWaitList = req.body;
   waitList.push(newWaitList);
   res.json(waitList);
-  console.log("Wait-list: " + waitList);
+  console.log(waitList);
 });
 
 //initialize server to listen to PORT
